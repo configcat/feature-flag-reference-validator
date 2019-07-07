@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM python:3.7-alpine
 
 RUN apk update
 RUN apk add --no-cache the_silver_searcher
