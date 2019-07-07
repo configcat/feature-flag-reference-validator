@@ -6,4 +6,7 @@ RUN apk add --no-cache the_silver_searcher
 COPY requirements.txt /
 RUN pip install -r /requirements.txt
 
-ENTRYPOINT ["./main.py"]
+COPY . /app
+WORKDIR /app
+
+ENTRYPOINT ["python", "-m", "main"]
