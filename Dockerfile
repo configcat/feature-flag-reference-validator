@@ -6,6 +6,7 @@ RUN apk add --no-cache the_silver_searcher
 COPY requirements.txt /
 RUN pip install -r /requirements.txt
 
+RUN mkdir /app
 COPY . /app
 WORKDIR /app
 
