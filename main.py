@@ -26,7 +26,7 @@ def main():
                         default=False,
                         const=True,
                         nargs='?',
-                        help="Turns on detailed logging",
+                        help="Turns on detailed logging.",
                         )
 
     args = parser.parse_args()
