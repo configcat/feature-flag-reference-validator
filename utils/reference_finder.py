@@ -5,7 +5,7 @@ import sys
 
 log = logging.getLogger(sys.modules[__name__].__name__)
 
-FLAG_REGEX = "(?:get_value|getValue|getValueAsync|GetValue|GetValueAsync|GetValueForUser)(?:.*?\s*?)?\((?:.*?\s*?)(?:[\"'])(?P<flag>.+?)(?:[\"'])"
+FLAG_REGEX = "(?:(?:get_value|getValue|getValueAsync|GetValue|GetValueAsync|GetValueForUser)(?:.*?\s*?)?\((?:.*?\s*?)(?:[\"'])(?P<flag>.+?)(?:[\"'])|(?:[\"'])(?P<remote_keys>##KEYS_PLACEHOLDER##)(?:[\"']))"
 
 
 class ReferenceFinder:
@@ -13,17 +13,21 @@ class ReferenceFinder:
                  path):
         self._path = path
 
-    def find_references(self):
+    def find_references(self, remote_keys):
         try:
             log.info("Searching for ConfigCat setting references.")
-            args = ["ag", "-s", "-o", FLAG_REGEX, self._path]
+
+            regex_final = FLAG_REGEX.replace("##KEYS_PLACEHOLDER##", '|'.join(remote_keys))
+            args = ["ag", "-s", "-o", regex_final, self._path]
             result = subprocess.check_output(args)
 
-            matches = re.findall(FLAG_REGEX, result.decode("utf-8"))
+            matches = re.findall(regex_final, result.decode("utf-8"))
             log.info("%s references found.", len(matches))
+
             flags = []
             for match in matches:
-                flags.append(match.strip())
+                for group in match:
+                    flags.append(group.strip())
 
             distinct = set(flags)
             log.debug("Distinct setting reference keys: %s", distinct)

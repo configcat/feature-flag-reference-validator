@@ -37,7 +37,8 @@ def main():
     fetcher = ConfigFetcher(args.api_key, args.base_url)
     finder = ReferenceFinder(args.search_dir)
 
-    if not ReferenceValidator.validate(set(fetcher.get_flag_keys()), finder.find_references()) and args.fail:
+    remote_keys = fetcher.get_flag_keys()
+    if not ReferenceValidator.validate(set(remote_keys), finder.find_references(remote_keys)) and args.fail:
         sys.exit(1)
 
 
