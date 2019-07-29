@@ -48,7 +48,7 @@ jobs:
         type: boolean
         default: false
     docker:
-      - image: configcat/flag-reference-validator:0.0.5
+      - image: configcat/flag-reference-validator:0.0.6
     working_directory: /ref-validator
     steps:
       - checkout:

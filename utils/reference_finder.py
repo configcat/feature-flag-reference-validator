@@ -5,7 +5,7 @@ import sys
 
 log = logging.getLogger(sys.modules[__name__].__name__)
 
-FLAG_REGEX = "(?:(?:get_value|getValue|getValueAsync|GetValue|GetValueAsync|GetValueForUser)(?:.*?\s*?)?\((?:.*?\s*?)(?:[\"'])(?P<flag>.+?)(?:[\"'])|(?:[\"'])(?P<remote_keys>##KEYS_PLACEHOLDER##)(?:[\"']))"
+FLAG_REGEX = "(?:(?:get_value|GetValue|GetValueAsync|GetValueForUser|GetValueAsyncForUser)(?:.*?\s*?)?\((?:\s*?)(?:[\"'])(?P<flags>.+?)(?:[\"'])|(?:getValue|getValueAsync)(?:.*?\s*?)?\((?:.*?\s*?)(?:[\"'])(?P<jflags>.+?)(?:[\"'])|(?:[\"'])(?P<remote_keys>##KEYS_PLACEHOLDER##)(?:[\"']))"
 
 
 class ReferenceFinder:
@@ -27,7 +27,8 @@ class ReferenceFinder:
             flags = []
             for match in matches:
                 for group in match:
-                    flags.append(group.strip())
+                    if group:
+                        flags.append(group.strip())
 
             distinct = set(flags)
             log.debug("Distinct setting reference keys: %s", distinct)
