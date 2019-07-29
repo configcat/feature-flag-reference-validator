@@ -1,0 +1,64 @@
+version: 2.1
+description: Job for finding and validating ConfigCat feature flag references in your source code.
+
+examples:
+  default_configuration:
+    description: Default configuration
+    usage:
+      version: 2.1
+      orbs:
+        configcat: configcat/flag_reference_validator@1.0.0
+      workflows:
+        main:
+          jobs:
+            - configcat/validate-flag-references:
+                api_key: "{YOUR_CONFIGCAT_API_KEY}"
+
+  complex_configuration:
+    description: Configuration with verbose logging and failure on validation warnings.
+    usage:
+      version: 2.1
+      orbs:
+        configcat: configcat/flag_reference_validator@1.0.0
+      workflows:
+        main:
+          jobs:
+            - configcat/validate-flag-references:
+                api_key: "{YOUR_CONFIGCAT_API_KEY}"
+                debug: true
+                fail_on_warnings: true
+
+jobs:
+  validate-flag-references:
+    description: Scans the repository for ConfigCat feature flag references and searches for missing keys.
+    parameters:
+      api_key:
+        description: The api key of your ConfigCat project.
+        type: string
+      base_url:
+        description: The base URL of the ConfigCat CDN server.
+        type: string
+        default: "cdn.configcat.com"
+      fail_on_warnings:
+        description: Instead of warnings an error will be signaled when the validation fails.
+        type: boolean
+        default: false
+      debug:
+        description: Turns on detailed logging.
+        type: boolean
+        default: false
+    docker:
+      - image: configcat/flag-reference-validator:0.0.4
+    working_directory: /ref-validator
+    steps:
+      - checkout:
+          path: /ref-validator/repo
+      - run:
+          name: Scan for flag references
+          command: |
+            python -m main \
+              << parameters.api_key >> \
+              ./repo \
+              -b=<< parameters.base_url >> \
+              -v=<< parameters.debug >> \
+              -f=<< parameters.fail_on_warnings >>

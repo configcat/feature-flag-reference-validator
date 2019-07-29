@@ -27,7 +27,7 @@ def main():
                         const=True,
                         nargs='?',
                         help="Turns on detailed logging.",
-                        )
+                        type=str2bool)
 
     args = parser.parse_args()
 
