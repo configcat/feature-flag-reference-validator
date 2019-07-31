@@ -48,7 +48,7 @@ jobs:
         type: boolean
         default: false
     docker:
-      - image: configcat/flag-reference-validator:0.0.6
+      - image: configcat/flag-reference-validator:0.0.7
     working_directory: /ref-validator
     steps:
       - checkout:
@@ -56,7 +56,7 @@ jobs:
       - run:
           name: Scan for flag references
           command: |
-            python -m main \
+            configcat-validator \
               << parameters.api_key >> \
               ./repo \
               -b=<< parameters.base_url >> \

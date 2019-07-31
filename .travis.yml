@@ -1,0 +1,31 @@
+language: python
+sudo: true
+python:
+  - "2.6"
+  - "2.7"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+  - "3.7-dev"
+install:
+  - "virtualenv venv --no-site-packages"
+  - "source venv/bin/activate"
+  - pip install --upgrade pip setuptools
+  - pip install --force-reinstall twine==1.12.1
+  - pip install .
+script:
+  - configcat-validator "92jVCNQBzuYAenfTn0PZQw/grLLS9QKeEiFJPNLan8K4w" "testcdn.configcat.com" ./sample_to_scan -v
+deploy:
+  provider: pypi
+  twine_version: 1.12.1
+  user: "$PYPI_USERNAME"
+  password: "$PYPI_PASSWORD"
+  skip_existing: true
+  skip_cleanup: true
+  edge: true
+  on:
+    tags: true
+    branch: master
+    python: 2.7
+
