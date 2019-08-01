@@ -11,6 +11,7 @@ python:
 install:
   - "virtualenv venv --no-site-packages"
   - "source venv/bin/activate"
+  - sudo apt-get install silversearcher-ag
   - pip install --upgrade pip setuptools
   - pip install --force-reinstall twine==1.12.1
   - pip install .
