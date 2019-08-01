@@ -13,7 +13,7 @@ setuptools.setup(
     name='configcat-flag-reference-validator',
     version=version,
     scripts=['configcat-validator'],
-    packages=['configcat.reference_validator'],
+    packages=['configcat', 'configcat.reference_validator'],
     url='https://github.com/configcat/flag-reference-validator',
     license='MIT',
     author='ConfigCat',
