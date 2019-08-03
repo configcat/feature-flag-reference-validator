@@ -1,9 +1,9 @@
 version: 2.1
-description: Job for finding and validating ConfigCat feature flag references in your source code.
+description: Install and use the ConfigCat feature flag reference validator. https://github.com/configcat/flag-reference-validator
 
 examples:
-  default_configuration:
-    description: Default configuration
+  job-default_configuration:
+    description: Executes the reference validatior job with default parameters.
     usage:
       version: 2.1
       orbs:
@@ -14,8 +14,8 @@ examples:
             - configcat/validate-flag-references:
                 api_key: "{YOUR_CONFIGCAT_API_KEY}"
 
-  complex_configuration:
-    description: Configuration with verbose logging and failure on validation warnings.
+  job-complex_configuration:
+    description: Executes the reference validatior job with verbose logging and fails the execution on validation warnings.
     usage:
       version: 2.1
       orbs:
@@ -28,6 +28,112 @@ examples:
                 debug: true
                 fail_on_warnings: true
 
+  install-validator-command:
+    description: Installs the ConfigCat validator and it's dependencies on the current environment. It uses `apt-get` and `pip` so it must be executed on an environment which has those.
+    usage:
+      version: 2.1
+      orbs:
+        configcat: configcat/flag_reference_validator@1.0.0
+      jobs:
+        build:
+          docker:
+            - image: circleci/python:2.7
+          steps:
+            - configcat/install-validator
+
+  execute-validation-command:
+    description: Installs the ConfigCat validator and executes the reference validation command with custom configuration on a python based docker environment.
+    usage:
+      version: 2.1
+      orbs:
+        configcat: configcat/flag_reference_validator@1.0.0
+      jobs:
+        build:
+          docker:
+            - image: circleci/python:2.7
+          steps:
+            - checkout:
+                path: /repo
+            - configcat/install-validator
+            - configcat/execute-validation:
+                api_key: "{YOUR_CONFIGCAT_API_KEY}"
+                debug: true
+                fail_on_warnings: true
+                scan_directory: /repo
+
+  custom-executor:
+    description: Executes the reference validatior in a job which uses the preconfigured configcat job executor.
+    usage:
+      version: 2.1
+      orbs:
+        configcat: configcat/flag_reference_validator@1.0.0
+      jobs:
+        build:
+          executor: configcat/configcat-executor
+          steps:
+            - checkout
+            - configcat/execute-validation:
+                api_key: "{YOUR_CONFIGCAT_API_KEY}"
+
+executors:
+  configcat-executor:
+    description: The Docker container to use when executing the reference validator job.
+    parameters:
+      docker-image-version:
+        description: The version of the ConfigCat flag reference validator docker image.
+        type: string
+        default: 0.0.7
+    docker:
+      - image: configcat/flag-reference-validator:<< parameters.docker-image-version >>
+
+commands:
+  install-validator:
+    description: Installs the ConfigCat flag reference validator tool and its dependencies.
+    parameters:
+      validator-version:
+        description: The version of the ConfigCat flag reference validator pypi package.
+        type: string
+        default: 0.0.7
+    steps:
+    - run:
+        name: Install dependencies
+        command: |
+          sudo apt-get install silversearcher-ag
+          sudo pip install configcat-flag-reference-validator==<< parameters.validator-version >>
+
+  execute-validation:
+    description: Scans the repository for ConfigCat feature flag references and searches for missing keys.
+    parameters:
+      api_key:
+        description: The api key of your ConfigCat project.
+        type: string
+      scan_directory:
+        description: The directory to scan for flag references.
+        type: string
+        default: .
+      base_url:
+        description: The base URL of the ConfigCat CDN server.
+        type: string
+        default: cdn.configcat.com
+      fail_on_warnings:
+        description: Instead of warnings an error will be signaled when the validation fails.
+        type: boolean
+        default: false
+      debug:
+        description: Turns on detailed logging.
+        type: boolean
+        default: false
+    steps:
+    - run:
+        name: Scan for flag references
+        command: |
+          configcat-validator \
+            << parameters.api_key >> \
+            << parameters.scan_directory >> \
+            -b=<< parameters.base_url >> \
+            -v=<< parameters.debug >> \
+            -f=<< parameters.fail_on_warnings >>
+
 jobs:
   validate-flag-references:
     description: Scans the repository for ConfigCat feature flag references and searches for missing keys.
@@ -38,7 +144,7 @@ jobs:
       base_url:
         description: The base URL of the ConfigCat CDN server.
         type: string
-        default: "cdn.configcat.com"
+        default: cdn.configcat.com
       fail_on_warnings:
         description: Instead of warnings an error will be signaled when the validation fails.
         type: boolean
@@ -47,18 +153,16 @@ jobs:
         description: Turns on detailed logging.
         type: boolean
         default: false
-    docker:
-      - image: configcat/flag-reference-validator:0.0.7
+    executor:
+      name: configcat-executor
+      docker-image-version: 0.0.7
     working_directory: /ref-validator
     steps:
       - checkout:
           path: /ref-validator/repo
-      - run:
-          name: Scan for flag references
-          command: |
-            configcat-validator \
-              << parameters.api_key >> \
-              ./repo \
-              -b=<< parameters.base_url >> \
-              -v=<< parameters.debug >> \
-              -f=<< parameters.fail_on_warnings >>
+      - execute-validation:
+          api_key: << parameters.api_key >>
+          base_url: << parameters.base_url >>
+          fail_on_warnings: << parameters.fail_on_warnings >>
+          debug: << parameters.debug >>
+          scan_directory: ./repo
