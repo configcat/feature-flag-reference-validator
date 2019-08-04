@@ -93,7 +93,7 @@ commands:
       validator-version:
         description: The version of the ConfigCat flag reference validator pypi package.
         type: string
-        default: 0.0.8
+        default: 0.0.9
     steps:
     - run:
         name: Install dependencies
@@ -155,7 +155,7 @@ jobs:
         default: false
     executor:
       name: configcat-executor
-      docker-image-version: 0.0.8
+      docker-image-version: 0.0.9
     working_directory: /ref-validator
     steps:
       - checkout:
