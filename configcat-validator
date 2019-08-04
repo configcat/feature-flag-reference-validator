@@ -11,15 +11,15 @@ from configcat.reference_validator.reference_validator import ReferenceValidator
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("api_key",
-                        help="The api key for your ConfigCat project.")
+    parser.add_argument("configcat_api_key",
+                        help="The api key of your ConfigCat project.")
     parser.add_argument("search_dir",
                         help="The directory to scan for flag references.")
-    parser.add_argument("-b", "--base_url",
-                        help="The base url for your ConfigCat configuration file.",
+    parser.add_argument("-s", "--configcat_cdn_server",
+                        help="The domain name of the ConfigCat CDN where you ConfigCat configuration file is stored.",
                         default="cdn.configcat.com")
-    parser.add_argument("-f", "--fail",
-                        help="Signals an error when the validation fails, by default only warnings are showed.",
+    parser.add_argument("-f", "--fail_on_warnings",
+                        help="Signals a build error when the validation fails. By default only warnings are showed.",
                         default=False,
                         const=True,
                         nargs='?',

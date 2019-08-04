@@ -15,13 +15,13 @@ class ReferenceValidator:
         if len(missing_references) > 0:
             result = False
             log.warning(
-                "There are settings set on the ConfigCat dashboard which are not used anywhere in the code! Keys: %s!",
+                "Feature flag/Setting keys not found in source code (but present in ConfigCat): %s.",
                 missing_references)
 
         if len(missing_remote_keys) > 0:
             result = False
             log.warning(
-                "There are settings used in the code which are not set on the ConfigCat dashboard! Keys: %s!",
+                "Feature flag/Setting keys not found in ConfigCat (but present in source code): %s.",
                 missing_remote_keys)
 
         return result

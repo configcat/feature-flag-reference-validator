@@ -82,7 +82,7 @@ executors:
       docker-image-version:
         description: The version of the ConfigCat flag reference validator docker image.
         type: string
-        default: 0.0.7
+        default: 0.0.8
     docker:
       - image: configcat/flag-reference-validator:<< parameters.docker-image-version >>
 
@@ -93,7 +93,7 @@ commands:
       validator-version:
         description: The version of the ConfigCat flag reference validator pypi package.
         type: string
-        default: 0.0.7
+        default: 0.0.8
     steps:
     - run:
         name: Install dependencies
@@ -102,21 +102,21 @@ commands:
           sudo pip install configcat-flag-reference-validator==<< parameters.validator-version >>
 
   execute-validation:
-    description: Scans the repository for ConfigCat feature flag references and searches for missing keys.
+    description: Scans the repository for ConfigCat feature flag references. Displays the missing feature flag keys in CircleCI's build log.
     parameters:
-      api_key:
+      configcat_api_key:
         description: The api key of your ConfigCat project.
         type: string
       scan_directory:
         description: The directory to scan for flag references.
         type: string
         default: .
-      base_url:
-        description: The base URL of the ConfigCat CDN server.
+      configcat_cdn_server:
+        description: The domain name of the ConfigCat CDN where you ConfigCat configuration file is stored.
         type: string
         default: cdn.configcat.com
       fail_on_warnings:
-        description: Instead of warnings an error will be signaled when the validation fails.
+        description: Signals a build error in CircleCI when the validation fails. By default only warnings are showed.
         type: boolean
         default: false
       debug:
@@ -128,25 +128,25 @@ commands:
         name: Scan for flag references
         command: |
           configcat-validator \
-            << parameters.api_key >> \
+            << parameters.configcat_api_key >> \
             << parameters.scan_directory >> \
-            -b=<< parameters.base_url >> \
+            -s=<< parameters.configcat_cdn_server >> \
             -v=<< parameters.debug >> \
             -f=<< parameters.fail_on_warnings >>
 
 jobs:
   validate-flag-references:
-    description: Scans the repository for ConfigCat feature flag references and searches for missing keys.
+    description: Scans the repository for ConfigCat feature flag references. Displays the missing feature flag keys in CircleCI's build log.
     parameters:
-      api_key:
+      configcat_api_key:
         description: The api key of your ConfigCat project.
         type: string
-      base_url:
-        description: The base URL of the ConfigCat CDN server.
+      configcat_cdn_server:
+        description: The domain name of the ConfigCat CDN where you ConfigCat configuration file is stored.
         type: string
         default: cdn.configcat.com
       fail_on_warnings:
-        description: Instead of warnings an error will be signaled when the validation fails.
+        description: Signals a build error in CircleCI when the validation fails. By default only warnings are showed.
         type: boolean
         default: false
       debug:
@@ -155,14 +155,14 @@ jobs:
         default: false
     executor:
       name: configcat-executor
-      docker-image-version: 0.0.7
+      docker-image-version: 0.0.8
     working_directory: /ref-validator
     steps:
       - checkout:
           path: /ref-validator/repo
       - execute-validation:
-          api_key: << parameters.api_key >>
-          base_url: << parameters.base_url >>
+          api_key: << parameters.configcat_api_key >>
+          base_url: << parameters.configcat_cdn_server >>
           fail_on_warnings: << parameters.fail_on_warnings >>
           debug: << parameters.debug >>
           scan_directory: ./repo
