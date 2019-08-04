@@ -82,7 +82,7 @@ executors:
       docker-image-version:
         description: The version of the ConfigCat flag reference validator docker image.
         type: string
-        default: 0.0.8
+        default: 0.0.9
     docker:
       - image: configcat/flag-reference-validator:<< parameters.docker-image-version >>
 
