@@ -36,11 +36,11 @@ def main():
     if args.verbose:
         logging.basicConfig(level=logging.DEBUG)
 
-    fetcher = ConfigFetcher(args.api_key, args.base_url)
+    fetcher = ConfigFetcher(args.configcat_api_key, args.configcat_cdn_server)
     finder = ReferenceFinder(args.search_dir)
 
     remote_keys = fetcher.get_flag_keys()
-    if not ReferenceValidator.validate(set(remote_keys), finder.find_references(remote_keys)) and args.fail:
+    if not ReferenceValidator.validate(set(remote_keys), finder.find_references(remote_keys)) and args.fail_on_warnings:
         sys.exit(1)
 
 
