@@ -161,8 +161,8 @@ jobs:
       - checkout:
           path: /ref-validator/repo
       - execute-validation:
-          api_key: << parameters.configcat_api_key >>
-          base_url: << parameters.configcat_cdn_server >>
+          configcat_api_key: << parameters.configcat_api_key >>
+          configcat_cdn_server: << parameters.configcat_cdn_server >>
           fail_on_warnings: << parameters.fail_on_warnings >>
           debug: << parameters.debug >>
           scan_directory: ./repo
