@@ -16,7 +16,7 @@ install:
   - pip install --force-reinstall twine==1.12.1
   - pip install .
 script:
-  - configcat-validator 92jVCNQBzuYAenfTn0PZQw/grLLS9QKeEiFJPNLan8K4w ./sample_to_scan -b=testcdn.configcat.com -v
+  - configcat-validator 92jVCNQBzuYAenfTn0PZQw/grLLS9QKeEiFJPNLan8K4w ./sample_to_scan -s=testcdn.configcat.com -v
 deploy:
   provider: pypi
   twine_version: 1.12.1
