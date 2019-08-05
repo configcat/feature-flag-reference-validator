@@ -6,7 +6,7 @@ def readme():
         return f.read()
 
 
-version = "1.0.0"
+version = "0.0.10"
 
 
 setuptools.setup(
