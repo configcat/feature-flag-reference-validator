@@ -11,8 +11,7 @@ examples:
       workflows:
         main:
           jobs:
-            - configcat/validate-flag-references:
-                api_key: "{YOUR_CONFIGCAT_API_KEY}"
+            - configcat/validate-flag-references
 
   job-complex_configuration:
     description: Executes the reference validatior job with verbose logging and fails the execution on validation warnings.
@@ -24,7 +23,6 @@ examples:
         main:
           jobs:
             - configcat/validate-flag-references:
-                api_key: "{YOUR_CONFIGCAT_API_KEY}"
                 debug: true
                 fail_on_warnings: true
 
@@ -56,7 +54,6 @@ examples:
                 path: /repo
             - configcat/install-validator
             - configcat/execute-validation:
-                api_key: "{YOUR_CONFIGCAT_API_KEY}"
                 debug: true
                 fail_on_warnings: true
                 scan_directory: /repo
@@ -72,11 +69,10 @@ examples:
           executor: configcat/configcat-executor
           steps:
             - checkout
-            - configcat/execute-validation:
-                api_key: "{YOUR_CONFIGCAT_API_KEY}"
+            - configcat/execute-validation
 
 executors:
-  configcat-executor:
+  default:
     description: The Docker container to use when executing the reference validator job.
     parameters:
       docker-image-version:
@@ -106,7 +102,8 @@ commands:
     parameters:
       configcat_api_key:
         description: The api key of your ConfigCat project.
-        type: string
+        default: "${CONFIG_CAT_API_KEY}"
+        type: env_var_name
       scan_directory:
         description: The directory to scan for flag references.
         type: string
@@ -140,7 +137,8 @@ jobs:
     parameters:
       configcat_api_key:
         description: The api key of your ConfigCat project.
-        type: string
+        default: "${CONFIG_CAT_API_KEY}"
+        type: env_var_name
       configcat_cdn_server:
         description: The domain name of the ConfigCat CDN where you ConfigCat configuration file is stored.
         type: string
@@ -154,7 +152,7 @@ jobs:
         type: boolean
         default: false
     executor:
-      name: configcat-executor
+      name: default
       docker-image-version: 0.0.9
     working_directory: /ref-validator
     steps:
