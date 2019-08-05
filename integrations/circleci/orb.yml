@@ -2,36 +2,36 @@ version: 2.1
 description: Install and use the ConfigCat feature flag reference validator. https://github.com/configcat/flag-reference-validator
 
 examples:
-  job-default_configuration:
+  job-default-configuration:
     description: Executes the reference validatior job with default parameters.
     usage:
       version: 2.1
       orbs:
-        configcat: configcat/flag_reference_validator@1.0.0
+        configcat: configcat/flag_reference_validator@1.0.1
       workflows:
         main:
           jobs:
             - configcat/validate-flag-references
 
-  job-complex_configuration:
+  job-complex-configuration:
     description: Executes the reference validatior job with verbose logging and fails the execution on validation warnings.
     usage:
       version: 2.1
       orbs:
-        configcat: configcat/flag_reference_validator@1.0.0
+        configcat: configcat/flag_reference_validator@1.0.1
       workflows:
         main:
           jobs:
             - configcat/validate-flag-references:
                 debug: true
-                fail_on_warnings: true
+                fail-on-warnings: true
 
   install-validator-command:
     description: Installs the ConfigCat validator and it's dependencies on the current environment. It uses `apt-get` and `pip` so it must be executed on an environment which has those.
     usage:
       version: 2.1
       orbs:
-        configcat: configcat/flag_reference_validator@1.0.0
+        configcat: configcat/flag_reference_validator@1.0.1
       jobs:
         build:
           docker:
@@ -44,7 +44,7 @@ examples:
     usage:
       version: 2.1
       orbs:
-        configcat: configcat/flag_reference_validator@1.0.0
+        configcat: configcat/flag_reference_validator@1.0.1
       jobs:
         build:
           docker:
@@ -55,15 +55,15 @@ examples:
             - configcat/install-validator
             - configcat/execute-validation:
                 debug: true
-                fail_on_warnings: true
-                scan_directory: /repo
+                fail-on-warnings: true
+                scan-directory: /repo
 
   custom-executor:
     description: Executes the reference validatior in a job which uses the preconfigured configcat job executor.
     usage:
       version: 2.1
       orbs:
-        configcat: configcat/flag_reference_validator@1.0.0
+        configcat: configcat/flag_reference_validator@1.0.1
       jobs:
         build:
           executor: configcat/default
@@ -100,19 +100,19 @@ commands:
   execute-validation:
     description: Scans the repository for ConfigCat feature flag references. Displays the missing feature flag keys in CircleCI's build log.
     parameters:
-      configcat_api_key:
+      configcat-api-key:
         description: The api key of your ConfigCat project.
         default: CONFIG_CAT_API_KEY
         type: env_var_name
-      scan_directory:
+      scan-directory:
         description: The directory to scan for flag references.
         type: string
         default: .
-      configcat_cdn_server:
+      configcat-cdn-server:
         description: The domain name of the ConfigCat CDN where you ConfigCat configuration file is stored.
         type: string
         default: cdn.configcat.com
-      fail_on_warnings:
+      fail-on-warnings:
         description: Signals a build error in CircleCI when the validation fails. By default only warnings are showed.
         type: boolean
         default: false
@@ -125,25 +125,25 @@ commands:
         name: Scan for flag references
         command: |
           configcat-validator \
-            ${<< parameters.configcat_api_key >>} \
-            << parameters.scan_directory >> \
-            -s=<< parameters.configcat_cdn_server >> \
+            ${<< parameters.configcat-api-key >>} \
+            << parameters.scan-directory >> \
+            -s=<< parameters.configcat-cdn-server >> \
             -v=<< parameters.debug >> \
-            -f=<< parameters.fail_on_warnings >>
+            -f=<< parameters.fail-on-warnings >>
 
 jobs:
   validate-flag-references:
     description: Scans the repository for ConfigCat feature flag references. Displays the missing feature flag keys in CircleCI's build log.
     parameters:
-      configcat_api_key:
+      configcat-api-key:
         description: The api key of your ConfigCat project.
         default: CONFIG_CAT_API_KEY
         type: env_var_name
-      configcat_cdn_server:
+      configcat-cdn-server:
         description: The domain name of the ConfigCat CDN where you ConfigCat configuration file is stored.
         type: string
         default: cdn.configcat.com
-      fail_on_warnings:
+      fail-on-warnings:
         description: Signals a build error in CircleCI when the validation fails. By default only warnings are showed.
         type: boolean
         default: false
@@ -159,8 +159,8 @@ jobs:
       - checkout:
           path: /ref-validator/repo
       - execute-validation:
-          configcat_api_key: << parameters.configcat_api_key >>
-          configcat_cdn_server: << parameters.configcat_cdn_server >>
-          fail_on_warnings: << parameters.fail_on_warnings >>
+          configcat-api-key: << parameters.configcat-api-key >>
+          configcat-cdn-server: << parameters.configcat-cdn-server >>
+          fail-on-warnings: << parameters.fail-on-warnings >>
           debug: << parameters.debug >>
-          scan_directory: ./repo
+          scan-directory: ./repo
