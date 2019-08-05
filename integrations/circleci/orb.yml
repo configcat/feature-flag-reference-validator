@@ -78,7 +78,7 @@ executors:
       docker-image-version:
         description: The version of the ConfigCat flag reference validator docker image.
         type: string
-        default: 0.0.10
+        default: 1.0.0
     docker:
       - image: configcat/flag-reference-validator:<< parameters.docker-image-version >>
 
@@ -89,7 +89,7 @@ commands:
       validator-version:
         description: The version of the ConfigCat flag reference validator pypi package.
         type: string
-        default: 0.0.10
+        default: 1.0.0
     steps:
     - run:
         name: Install dependencies
@@ -102,7 +102,7 @@ commands:
     parameters:
       configcat_api_key:
         description: The api key of your ConfigCat project.
-        default: "${CONFIG_CAT_API_KEY}"
+        default: CONFIG_CAT_API_KEY
         type: env_var_name
       scan_directory:
         description: The directory to scan for flag references.
@@ -125,7 +125,7 @@ commands:
         name: Scan for flag references
         command: |
           configcat-validator \
-            << parameters.configcat_api_key >> \
+            ${<< parameters.configcat_api_key >>} \
             << parameters.scan_directory >> \
             -s=<< parameters.configcat_cdn_server >> \
             -v=<< parameters.debug >> \
@@ -137,7 +137,7 @@ jobs:
     parameters:
       configcat_api_key:
         description: The api key of your ConfigCat project.
-        default: "${CONFIG_CAT_API_KEY}"
+        default: CONFIG_CAT_API_KEY
         type: env_var_name
       configcat_cdn_server:
         description: The domain name of the ConfigCat CDN where you ConfigCat configuration file is stored.
@@ -153,7 +153,7 @@ jobs:
         default: false
     executor:
       name: default
-      docker-image-version: 0.0.10
+      docker-image-version: 1.0.0
     working_directory: /ref-validator
     steps:
       - checkout:
