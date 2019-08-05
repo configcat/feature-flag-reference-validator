@@ -15,15 +15,12 @@ class ReferenceFinder:
 
     def find_references(self, remote_keys):
         try:
-            log.info("Searching for ConfigCat setting references.")
+            log.info("Scanning the %s directory for ConfigCat setting references.", self._path)
 
             regex_final = FLAG_REGEX.replace("##KEYS_PLACEHOLDER##", '|'.join(remote_keys))
             args = ["ag", "-s", "-o", regex_final, self._path]
             result = subprocess.check_output(args)
-
             matches = re.findall(regex_final, result.decode("utf-8"))
-            log.info("%s references found.", len(matches))
-
             flags = []
             for match in matches:
                 for group in match:
@@ -31,7 +28,7 @@ class ReferenceFinder:
                         flags.append(group.strip())
 
             distinct = set(flags)
-            log.debug("Distinct setting reference keys: %s", distinct)
+            log.info("%s references found: %s.", len(matches), distinct)
             return distinct
         except subprocess.CalledProcessError:
             log.warning("No feature flag references found!")

@@ -5,6 +5,9 @@ log = logging.getLogger(sys.modules[__name__].__name__)
 
 
 class ReferenceValidator:
+    def __init__(self):
+        pass
+
     @staticmethod
     def validate(remote_keys,
                  reference_keys):

@@ -66,7 +66,7 @@ examples:
         configcat: configcat/flag_reference_validator@1.0.0
       jobs:
         build:
-          executor: configcat/configcat-executor
+          executor: configcat/default
           steps:
             - checkout
             - configcat/execute-validation
@@ -78,7 +78,7 @@ executors:
       docker-image-version:
         description: The version of the ConfigCat flag reference validator docker image.
         type: string
-        default: 0.0.9
+        default: 0.0.10
     docker:
       - image: configcat/flag-reference-validator:<< parameters.docker-image-version >>
 
@@ -89,7 +89,7 @@ commands:
       validator-version:
         description: The version of the ConfigCat flag reference validator pypi package.
         type: string
-        default: 0.0.9
+        default: 0.0.10
     steps:
     - run:
         name: Install dependencies
@@ -153,7 +153,7 @@ jobs:
         default: false
     executor:
       name: default
-      docker-image-version: 0.0.9
+      docker-image-version: 0.0.10
     working_directory: /ref-validator
     steps:
       - checkout:

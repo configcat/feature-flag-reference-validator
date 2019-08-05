@@ -8,6 +8,8 @@ from configcat.reference_validator.config_fetcher import ConfigFetcher
 from configcat.reference_validator.reference_finder import ReferenceFinder
 from configcat.reference_validator.reference_validator import ReferenceValidator
 
+log = logging.getLogger(sys.modules[__name__].__name__)
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -35,13 +37,21 @@ def main():
 
     if args.verbose:
         logging.basicConfig(level=logging.DEBUG)
+    else:
+        logging.basicConfig(level=logging.INFO)
 
     fetcher = ConfigFetcher(args.configcat_api_key, args.configcat_cdn_server)
     finder = ReferenceFinder(args.search_dir)
 
     remote_keys = fetcher.get_flag_keys()
-    if not ReferenceValidator.validate(set(remote_keys), finder.find_references(remote_keys)) and args.fail_on_warnings:
+
+    validation_result = ReferenceValidator.validate(set(remote_keys), finder.find_references(remote_keys))
+
+    if not validation_result and args.fail_on_warnings:
         sys.exit(1)
+
+    if validation_result:
+        log.info("No differences found!")
 
 
 def str2bool(v):
