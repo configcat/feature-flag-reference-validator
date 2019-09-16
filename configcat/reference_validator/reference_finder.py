@@ -5,7 +5,7 @@ import sys
 
 log = logging.getLogger(sys.modules[__name__].__name__)
 
-FLAG_REGEX = "(?:(?:get_value|GetValue|GetValueAsync|GetValueForUser|GetValueAsyncForUser)(?:.*?\s*?)?\((?:\s*?)(?:[\"'])(?P<flags>.+?)(?:[\"'])|(?:getValue|getValueAsync)(?:.*?\s*?)?\((?:.*?\s*?)(?:[\"'])(?P<jflags>.+?)(?:[\"'])|(?:[\"'])(?P<remote_keys>##KEYS_PLACEHOLDER##)(?:[\"']))"
+FLAG_REGEX = "(?:(?:get_value|GetValue|GetValueAsync|GetValueForUser|GetValueAsyncForUser)(?:.*?\s*?)?\((?:\s*?)(?:[\"'])(?P<flags>.+?)(?:[\"'])|(?:getValue|getValueAsync|getStringValue|getIntValue|getDoubleValue|getBoolValue|getAnyValue|getStringValueAsync|getIntValueAsync|getDoubleValueAsync|getBoolValueAsync|getAnyValueAsync)(?:.*?\s*?)?\((?:.*?\s*?)(?:[\"'])(?P<jflags>.+?)(?:[\"'])|(?:[\"'])(?P<remote_keys>##KEYS_PLACEHOLDER##)(?:[\"']))"
 
 
 class ReferenceFinder:
