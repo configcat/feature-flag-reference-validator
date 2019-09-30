@@ -3,7 +3,7 @@
 
 CLI tool for validating ConfigCat feature flag references in your source code.
 
-This tool can be used for discovering ConfigCat feature flag usage in your source code and validating them against your own ConfigCat configuration dashboard. It searches for ConfigCat SDK usage and greps the feature flag keys from the source code, then it compares them with the keys got from your ConfigCat dashboard.
+This tool can be used for discovering ConfigCat feature flag usages in your source code and validating them against your own ConfigCat configuration dashboard. It searches for ConfigCat SDK usage and greps the feature flag keys from the source code, then it compares them with the keys got from your ConfigCat dashboard.
 
 ## Installation
 
