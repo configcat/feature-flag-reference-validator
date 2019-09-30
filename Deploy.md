@@ -36,7 +36,7 @@ At this point you should have a new [docker image](https://cloud.docker.com/u/co
    ```bash
    circleci orb publish orb.yml configcat/flag_reference_validator@[MAJOR].[MINOR].[PATCH]
    ```
-   > Example: `circleci orb publish orb.yml configcat/flag_reference_validator@1.2.1`
+   > Example: `circleci orb publish integrations/circleci/orb.yml configcat/flag_reference_validator@1.2.1`
    
    > You can also publish non-public developer versions with the `dev:` version prefix like: `flag_reference_validator@dev:1.2.1`
 6. Make sure the new version is available in the [Orb Registry](https://circleci.com/orbs/registry/orb/configcat/flag_reference_validator).
