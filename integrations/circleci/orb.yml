@@ -7,7 +7,7 @@ examples:
     usage:
       version: 2.1
       orbs:
-        configcat: configcat/flag_reference_validator@1.0.2
+        configcat: configcat/flag_reference_validator@1.0.3
       workflows:
         main:
           jobs:
@@ -18,7 +18,7 @@ examples:
     usage:
       version: 2.1
       orbs:
-        configcat: configcat/flag_reference_validator@1.0.2
+        configcat: configcat/flag_reference_validator@1.0.3
       workflows:
         main:
           jobs:
@@ -31,7 +31,7 @@ examples:
     usage:
       version: 2.1
       orbs:
-        configcat: configcat/flag_reference_validator@1.0.2
+        configcat: configcat/flag_reference_validator@1.0.3
       jobs:
         build:
           docker:
@@ -44,7 +44,7 @@ examples:
     usage:
       version: 2.1
       orbs:
-        configcat: configcat/flag_reference_validator@1.0.2
+        configcat: configcat/flag_reference_validator@1.0.3
       jobs:
         build:
           docker:
@@ -63,7 +63,7 @@ examples:
     usage:
       version: 2.1
       orbs:
-        configcat: configcat/flag_reference_validator@1.0.2
+        configcat: configcat/flag_reference_validator@1.0.3
       jobs:
         build:
           executor: configcat/default
@@ -78,7 +78,7 @@ executors:
       docker-image-version:
         description: The version of the ConfigCat flag reference validator docker image.
         type: string
-        default: 1.0.2
+        default: 1.0.3
     docker:
       - image: configcat/flag-reference-validator:<< parameters.docker-image-version >>
 
@@ -89,7 +89,7 @@ commands:
       validator-version:
         description: The version of the ConfigCat flag reference validator pypi package.
         type: string
-        default: 1.0.2
+        default: 1.0.3
     steps:
     - run:
         name: Install dependencies
@@ -153,7 +153,7 @@ jobs:
         default: false
     executor:
       name: default
-      docker-image-version: 1.0.2
+      docker-image-version: 1.0.3
     working_directory: /ref-validator
     steps:
       - checkout:
