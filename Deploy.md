@@ -6,7 +6,7 @@
    ```
 2. Increase the versions in `setup.py`.
 
-## Publish
+## Publish a new docker image and pypi package
 Use the **same version** for the git tag as in the 2. step of the Preparation section.
 - Via git tag
     1. Create a new version tag.
@@ -22,16 +22,17 @@ Use the **same version** for the git tag as in the 2. step of the Preparation se
 
   Create a new [Github release](https://github.com/configcat/flag-reference-validator/releases) with a new version tag and release notes.
 
-At this point you have a new [docker image](https://cloud.docker.com/u/configcat/repository/docker/configcat/flag-reference-validator) and [pypi package](https://pypi.org/project/configcat-flag-reference-validator/) with the version you set earlier.
+At this point you should have a new [docker image](https://cloud.docker.com/u/configcat/repository/docker/configcat/flag-reference-validator) and [pypi package](https://pypi.org/project/configcat-flag-reference-validator/) with the new version you set earlier.
 
 ## Publish a new CircleCI orb
 1. Install the [CircleCI CLI](https://circleci.com/docs/2.0/local-cli/#quick-installation).
-1. Update the new pypi package and docker image versions in `integrations/circleci/orb.yml`.
-2. Validate the orb configuration.
+2. Follow [these instructions](https://circleci.com/docs/2.0/local-cli/#configuring-the-cli) to configure the CLI.
+3. Update the new pypi package and docker image versions in `integrations/circleci/orb.yml`.
+4. Validate the orb configuration.
    ```bash
    circleci orb validate integrations/circleci/orb.yml
    ```
-4. Publish the new orb.
+5. Publish the new orb.
    ```bash
    circleci orb publish orb.yml configcat/flag_reference_validator@[MAJOR].[MINOR].[PATCH]
    ```
