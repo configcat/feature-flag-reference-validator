@@ -13,7 +13,6 @@ setuptools.setup(
     author_email='developer@configcat.com',
     description='ConfigCat feature flag reference validator.',
     long_description="This tool can be used for discovering ConfigCat feature flag usages in your source code and validating them against your own ConfigCat configuration dashboard. It searches for ConfigCat SDK usage and greps the feature flag keys from the source code, then it compares them with the keys got from your ConfigCat dashboard.",
-    long_description_content_type="text/markdown",
     install_requires=['requests>=2.19.1'],
     classifiers=[
         'Intended Audience :: Developers',
