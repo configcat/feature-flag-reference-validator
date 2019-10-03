@@ -66,7 +66,7 @@ Exited with code 1
 ```
 
 ## CI Integrations
-- [CircleCI Orb](https://circleci.com/orbs/registry/orb/configcat/flag_reference_validator)
+- [CircleCI Orb](https://circleci.com/orbs/registry/orb/configcat/feature-flag-reference-validator)
 
 ## About ConfigCat
 - [Documentation](https://docs.configcat.com)
