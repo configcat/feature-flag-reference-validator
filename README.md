@@ -1,5 +1,5 @@
-# flag-reference-validator 
-[![PyPI](https://img.shields.io/pypi/v/configcat-flag-reference-validator.svg)](https://pypi.python.org/pypi/configcat-flag-reference-validator) [![Docker version](https://img.shields.io/badge/docker-latest-blue)](https://hub.docker.com/r/configcat/flag-reference-validator)
+# feature-flag-reference-validator 
+[![PyPI](https://img.shields.io/pypi/v/configcat-flag-reference-validator.svg)](https://pypi.python.org/pypi/configcat-flag-reference-validator) [![Docker version](https://img.shields.io/badge/docker-latest-blue)](https://hub.docker.com/r/configcat/feature-flag-reference-validator)
 
 CLI tool for validating ConfigCat feature flag references in your source code.
 
@@ -29,9 +29,9 @@ This CLI tool is written in python so you have to have python installed on your 
 
 ### Docker
 
-Pull the configcat/flag-reference-validator docker image to your environment. The image provides an entrypoint `configcat-validator` to execute the validator.
+Pull the configcat/feature-flag-reference-validator docker image to your environment. The image provides an entrypoint `configcat-validator` to execute the validator.
 ```powershell
-docker pull configcat/flag-reference-validator
+docker pull configcat/feature-flag-reference-validator
 
 docker run configcat-validator [YOUR-CONFIGCAT-APIKEY] [DIRECTORY-TO-SCAN]
 ```
