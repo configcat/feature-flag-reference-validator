@@ -51,7 +51,7 @@ def main():
         sys.exit(1)
 
     if validation_result:
-        log.info("No differences found!")
+        log.info("PASSED. No differences found!")
 
 
 def str2bool(v):
