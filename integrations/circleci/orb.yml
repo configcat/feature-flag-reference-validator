@@ -108,11 +108,13 @@ commands:
     steps:
     - run:
         name: Install feature flag reference validator dependencies
+        shell: powershell.exe
         command: |
           choco install python --no-progress
           choco install ag --no-progress
     - run:
         name: Install feature flag reference validator
+        shell: powershell.exe
         command: pip install configcat-flag-reference-validator==<< parameters.validator-version >>
 
   execute-validation:
@@ -170,6 +172,7 @@ commands:
     steps:
     - run:
         name: Scan for flag references
+        shell: powershell.exe
         command: |
           configcat-validator.py $env:<< parameters.configcat-api-key >> << parameters.scan-directory >> -s="<< parameters.configcat-cdn-server >>" -v=<< parameters.debug >> -f=<< parameters.fail-on-warnings >>
 
