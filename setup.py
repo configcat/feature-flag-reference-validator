@@ -5,7 +5,7 @@ version = "1.0.5"
 setuptools.setup(
     name='configcat-flag-reference-validator',
     version=version,
-    scripts=['configcat-validator'],
+    scripts=['configcat-validator.py'],
     packages=['configcat', 'configcat.reference_validator'],
     url='https://github.com/configcat/feature-flag-reference-validator',
     license='MIT',

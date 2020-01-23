@@ -8,4 +8,4 @@ WORKDIR /ref-validator
 
 RUN pip install .
 
-ENTRYPOINT ["configcat-validator"]
+ENTRYPOINT ["configcat-validator.py"]

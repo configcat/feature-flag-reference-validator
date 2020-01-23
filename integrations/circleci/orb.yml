@@ -93,9 +93,10 @@ commands:
     steps:
     - run:
         name: Install feature flag validator dependencies
-        command: |
-          sudo apt-get install silversearcher-ag
-          sudo pip install configcat-flag-reference-validator==<< parameters.validator-version >>
+        command: sudo apt-get install silversearcher-ag
+    - run:
+        name: Install feature flag reference validator
+        command: sudo pip install configcat-flag-reference-validator==<< parameters.validator-version >>
 
   install-validator-win:
     description: Installs the ConfigCat flag reference validator tool and its dependencies.
@@ -106,11 +107,13 @@ commands:
         default: 1.0.5
     steps:
     - run:
-        name: Install feature flag validator dependencies
+        name: Install feature flag reference validator dependencies
         command: |
-          choco install python
-          choco install ag
-          pip install configcat-flag-reference-validator==<< parameters.validator-version >>
+          choco install python --no-progress
+          choco install ag --no-progress
+    - run:
+        name: Install feature flag reference validator
+        command: pip install configcat-flag-reference-validator==<< parameters.validator-version >>
 
   execute-validation:
     description: Scans the repository for ConfigCat feature flag references. Displays the missing feature flag keys in CircleCI's build log.
@@ -139,12 +142,7 @@ commands:
     - run:
         name: Scan for flag references
         command: |
-          configcat-validator \
-            ${<< parameters.configcat-api-key >>} \
-            << parameters.scan-directory >> \
-            -s=<< parameters.configcat-cdn-server >> \
-            -v=<< parameters.debug >> \
-            -f=<< parameters.fail-on-warnings >>
+          configcat-validator.py ${<< parameters.configcat-api-key >>} << parameters.scan-directory >> -s=<< parameters.configcat-cdn-server >> -v=<< parameters.debug >> -f=<< parameters.fail-on-warnings >>
 
 jobs:
   validate-flag-references:
