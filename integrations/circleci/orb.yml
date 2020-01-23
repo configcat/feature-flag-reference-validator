@@ -7,7 +7,7 @@ examples:
     usage:
       version: 2.1
       orbs:
-        configcat: configcat/feature-flag-reference-validator@1.0.5
+        configcat: configcat/feature-flag-reference-validator@1.0
       workflows:
         main:
           jobs:
@@ -18,7 +18,7 @@ examples:
     usage:
       version: 2.1
       orbs:
-        configcat: configcat/feature-flag-reference-validator@1.0.5
+        configcat: configcat/feature-flag-reference-validator@1.0
       workflows:
         main:
           jobs:
@@ -31,7 +31,7 @@ examples:
     usage:
       version: 2.1
       orbs:
-        configcat: configcat/feature-flag-reference-validator@1.0.5
+        configcat: configcat/feature-flag-reference-validator@1.0
       jobs:
         build:
           docker:
@@ -44,7 +44,7 @@ examples:
     usage:
       version: 2.1
       orbs:
-        configcat: configcat/feature-flag-reference-validator@1.0.5
+        configcat: configcat/feature-flag-reference-validator@1.0
       jobs:
         build:
           docker:
@@ -63,7 +63,7 @@ examples:
     usage:
       version: 2.1
       orbs:
-        configcat: configcat/feature-flag-reference-validator@1.0.5
+        configcat: configcat/feature-flag-reference-validator@1.0
       jobs:
         build:
           executor: configcat/default
@@ -78,7 +78,7 @@ executors:
       docker-image-version:
         description: The version of the ConfigCat flag reference validator docker image.
         type: string
-        default: 1.0.5
+        default: 1.0
     docker:
       - image: configcat/feature-flag-reference-validator:<< parameters.docker-image-version >>
 
@@ -89,13 +89,28 @@ commands:
       validator-version:
         description: The version of the ConfigCat flag reference validator pypi package.
         type: string
-        default: 1.0.5
+        default: 1.0
     steps:
     - run:
         name: Install dependencies
         command: |
           sudo apt-get install silversearcher-ag
           sudo pip install configcat-flag-reference-validator==<< parameters.validator-version >>
+  
+  install-validator-win:
+    description: Installs the ConfigCat flag reference validator tool and its dependencies on windows.
+    parameters:
+      validator-version:
+        description: The version of the ConfigCat flag reference validator pypi package.
+        type: string
+        default: 1.0
+    steps:
+    - run:
+        name: Install dependencies
+        command: |
+          choco install python
+          choco install ag
+          pip install configcat-flag-reference-validator==<< parameters.validator-version >>
 
   execute-validation:
     description: Scans the repository for ConfigCat feature flag references. Displays the missing feature flag keys in CircleCI's build log.
@@ -153,7 +168,7 @@ jobs:
         default: false
     executor:
       name: default
-      docker-image-version: 1.0.5
+      docker-image-version: 1.0
     working_directory: /ref-validator
     steps:
       - checkout:
