@@ -142,7 +142,36 @@ commands:
     - run:
         name: Scan for flag references
         command: |
-          configcat-validator.py ${<< parameters.configcat-api-key >>} << parameters.scan-directory >> -s=<< parameters.configcat-cdn-server >> -v=<< parameters.debug >> -f=<< parameters.fail-on-warnings >>
+          configcat-validator.py $<< parameters.configcat-api-key >> << parameters.scan-directory >> -s="<< parameters.configcat-cdn-server >>" -v=<< parameters.debug >> -f=<< parameters.fail-on-warnings >>
+
+  execute-validation-win:
+    description: Scans the repository for ConfigCat feature flag references on windows. Displays the missing feature flag keys in CircleCI's build log.
+    parameters:
+      configcat-api-key:
+        description: The api key of your ConfigCat project.
+        default: CONFIG_CAT_API_KEY
+        type: env_var_name
+      scan-directory:
+        description: The directory to scan for flag references.
+        type: string
+        default: .
+      configcat-cdn-server:
+        description: The domain name of the ConfigCat CDN where you ConfigCat configuration file is stored.
+        type: string
+        default: cdn.configcat.com
+      fail-on-warnings:
+        description: Signals a build error in CircleCI when the validation fails. By default only warnings are showed.
+        type: boolean
+        default: false
+      debug:
+        description: Turns on detailed logging.
+        type: boolean
+        default: false
+    steps:
+    - run:
+        name: Scan for flag references
+        command: |
+          configcat-validator.py $env:<< parameters.configcat-api-key >> << parameters.scan-directory >> -s="<< parameters.configcat-cdn-server >>" -v=<< parameters.debug >> -f=<< parameters.fail-on-warnings >>
 
 jobs:
   validate-flag-references:

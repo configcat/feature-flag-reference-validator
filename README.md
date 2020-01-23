@@ -24,16 +24,16 @@ This CLI tool is written in python so you have to have python installed on your 
     ```
 3. Execute the validator.
     ```bash
-    configcat-validator [YOUR-CONFIGCAT-APIKEY] [DIRECTORY-TO-SCAN] 
+    configcat-validator.py [YOUR-CONFIGCAT-APIKEY] [DIRECTORY-TO-SCAN] 
     ```
 
 ### Docker
 
-Pull the configcat/feature-flag-reference-validator docker image to your environment. The image provides an entrypoint `configcat-validator` to execute the validator.
+Pull the configcat/feature-flag-reference-validator docker image to your environment. The image provides an entrypoint `configcat-validator.py` to execute the validator.
 ```powershell
 docker pull configcat/feature-flag-reference-validator
 
-docker run configcat-validator [YOUR-CONFIGCAT-APIKEY] [DIRECTORY-TO-SCAN]
+docker run configcat-validator.py [YOUR-CONFIGCAT-APIKEY] [DIRECTORY-TO-SCAN]
 ```
 
 ## Arguments
@@ -49,7 +49,7 @@ docker run configcat-validator [YOUR-CONFIGCAT-APIKEY] [DIRECTORY-TO-SCAN]
 ## Example
 The following command will execute a flag reference validation on the ./repo folder and signals a failure when it finds flag key mismatches.
 ```bash
-configcat-validator \
+configcat-validator.py \
     [YOUR-CONFIGCAT-APIKEY] \
     ./repo \
     --fail_on_warnings \
