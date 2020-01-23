@@ -78,7 +78,7 @@ executors:
       docker-image-version:
         description: The version of the ConfigCat flag reference validator docker image.
         type: string
-        default: 1.0
+        default: 1.0.5
     docker:
       - image: configcat/feature-flag-reference-validator:<< parameters.docker-image-version >>
 
@@ -89,24 +89,24 @@ commands:
       validator-version:
         description: The version of the ConfigCat flag reference validator pypi package.
         type: string
-        default: 1.0
+        default: 1.0.5
     steps:
     - run:
-        name: Install flag reference validator dependencies
+        name: Install dependencies
         command: |
           sudo apt-get install silversearcher-ag
           sudo pip install configcat-flag-reference-validator==<< parameters.validator-version >>
-  
+
   install-validator-win:
-    description: Installs the ConfigCat flag reference validator tool and its dependencies on windows.
+    description: Installs the ConfigCat flag reference validator tool and its dependencies.
     parameters:
       validator-version:
         description: The version of the ConfigCat flag reference validator pypi package.
         type: string
-        default: 1.0
+        default: 1.0.5
     steps:
     - run:
-        name: Install flag reference validator dependencies
+        name: Install dependencies
         command: |
           choco install python
           choco install ag
@@ -168,7 +168,7 @@ jobs:
         default: false
     executor:
       name: default
-      docker-image-version: 1.0
+      docker-image-version: 1.0.5
     working_directory: /ref-validator
     steps:
       - checkout:
