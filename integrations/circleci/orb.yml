@@ -99,7 +99,7 @@ commands:
         command: sudo pip install configcat-flag-reference-validator==<< parameters.validator-version >>
 
   install-validator-win:
-    description: Installs the ConfigCat flag reference validator tool and its dependencies.
+    description: Installs the ConfigCat flag reference validator tool and its dependencies on windows.
     parameters:
       validator-version:
         description: The version of the ConfigCat flag reference validator pypi package.
@@ -198,7 +198,6 @@ jobs:
         default: false
     executor:
       name: default
-      docker-image-version: 1.0.7
     working_directory: /ref-validator
     steps:
       - checkout:
