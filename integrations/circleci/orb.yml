@@ -92,7 +92,7 @@ commands:
         default: 1.0.5
     steps:
     - run:
-        name: Install dependencies
+        name: Install feature flag validator dependencies
         command: |
           sudo apt-get install silversearcher-ag
           sudo pip install configcat-flag-reference-validator==<< parameters.validator-version >>
@@ -106,7 +106,7 @@ commands:
         default: 1.0.5
     steps:
     - run:
-        name: Install dependencies
+        name: Install feature flag validator dependencies
         command: |
           choco install python
           choco install ag
