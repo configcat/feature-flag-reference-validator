@@ -78,7 +78,7 @@ executors:
       docker-image-version:
         description: The version of the ConfigCat flag reference validator docker image.
         type: string
-        default: 1.0.6
+        default: 1.0.7
     docker:
       - image: configcat/feature-flag-reference-validator:<< parameters.docker-image-version >>
 
@@ -89,7 +89,7 @@ commands:
       validator-version:
         description: The version of the ConfigCat flag reference validator pypi package.
         type: string
-        default: 1.0.6
+        default: 1.0.7
     steps:
     - run:
         name: Install feature flag validator dependencies
@@ -104,7 +104,7 @@ commands:
       validator-version:
         description: The version of the ConfigCat flag reference validator pypi package.
         type: string
-        default: 1.0.6
+        default: 1.0.7
     steps:
     - run:
         name: Install feature flag reference validator dependencies
@@ -166,7 +166,7 @@ jobs:
         default: false
     executor:
       name: default
-      docker-image-version: 1.0.6
+      docker-image-version: 1.0.7
     working_directory: /ref-validator
     steps:
       - checkout:
