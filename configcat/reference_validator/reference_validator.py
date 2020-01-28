@@ -14,9 +14,8 @@ class ReferenceValidator:
         missing_references = remote_keys.difference(reference_keys)
         missing_remote_keys = reference_keys.difference(remote_keys)
 
-        result = True
-        if len(missing_references) > 0 or len(missing_references) > 0:
-            result = False
+        is_failed = len(missing_references) > 0 or len(missing_remote_keys) > 0
+        if is_failed:
             log.warning("Found unused feature flags!")
 
         if len(missing_references) > 0:
@@ -33,4 +32,4 @@ class ReferenceValidator:
             for item in missing_remote_keys:
                 log.warning("Clean up '%s' from code.", item)
 
-        return result
+        return not is_failed
