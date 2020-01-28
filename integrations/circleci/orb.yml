@@ -78,7 +78,7 @@ executors:
       docker-image-version:
         description: The version of the ConfigCat flag reference validator docker image.
         type: string
-        default: 1.0.7
+        default: 1.0.9
     docker:
       - image: configcat/feature-flag-reference-validator:<< parameters.docker-image-version >>
 
@@ -89,7 +89,7 @@ commands:
       validator-version:
         description: The version of the ConfigCat flag reference validator pypi package.
         type: string
-        default: 1.0.7
+        default: 1.0.9
     steps:
     - run:
         name: Install feature flag validator dependencies
@@ -104,7 +104,7 @@ commands:
       validator-version:
         description: The version of the ConfigCat flag reference validator pypi package.
         type: string
-        default: 1.0.7
+        default: 1.0.9
     steps:
     - run:
         name: Install feature flag reference validator dependencies
@@ -142,7 +142,7 @@ commands:
         default: false
     steps:
     - run:
-        name: Scan for flag references
+        name: Scanning code for unused feature flags
         command: |
           configcat-validator.py $<< parameters.configcat-api-key >> << parameters.scan-directory >> -s="<< parameters.configcat-cdn-server >>" -v=<< parameters.debug >> -f=<< parameters.fail-on-warnings >>
 
@@ -171,7 +171,7 @@ commands:
         default: false
     steps:
     - run:
-        name: Scan for flag references
+        name: Scanning code for unused feature flags
         shell: powershell.exe
         command: |
           configcat-validator.py $env:<< parameters.configcat-api-key >> << parameters.scan-directory >> -s="<< parameters.configcat-cdn-server >>" -v=<< parameters.debug >> -f=<< parameters.fail-on-warnings >>
