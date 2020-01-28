@@ -51,7 +51,7 @@ def main():
         sys.exit(1)
 
     if validation_result:
-        log.info("PASSED. everything's fine, didn't find any unused feature flags.")
+        log.info("PASSED. Everything's fine, didn't find any unused feature flags.")
 
 
 def str2bool(v):
