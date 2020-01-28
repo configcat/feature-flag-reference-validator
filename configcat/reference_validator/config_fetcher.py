@@ -18,7 +18,7 @@ class ConfigFetcher:
         self._base_url = base_url.rstrip('/')
 
     def get_flag_keys(self):
-        log.info("Fetching the current ConfigCat configuration from %s.", self._base_url)
+        log.debug("Fetching the current ConfigCat configuration from %s.", self._base_url)
         uri = 'https://' + self._base_url + '/configuration-files/' + self._api_key + '/config_v2.json'
         try:
             response = self._session.get(uri, headers={'X-ConfigCat-UserAgent': 'ConfigCat-CircleCI',
@@ -29,7 +29,7 @@ class ConfigFetcher:
             for key, value in json.items():
                 keys.append(key)
 
-            log.info("Successful fetch, %s settings found: %s.", len(keys), keys)
+            log.debug("Successful fetch, %s settings found in ConfigCat Dashboard: %s.", len(keys), keys)
             return keys
         except HTTPError as err:
             log.error("HTTP error recieved: %s.", str(err.response))
