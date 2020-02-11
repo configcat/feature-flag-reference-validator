@@ -1,5 +1,11 @@
 version: 2.1
-description: "Job and commands for discovering ConfigCat feature flag usages in your source code and validating them against your own ConfigCat configuration dashboard. Documentation: https://github.com/configcat/feature-flag-reference-validator"
+description: |
+  Job and commands for discovering ConfigCat feature flag usages in your source
+  code and validating them against your own ConfigCat configuration dashboard.
+  Documentation: https://github.com/configcat/feature-flag-reference-validator
+
+display:
+  home_url: https://configcat.com
 
 examples:
   job-default-configuration:
@@ -144,7 +150,11 @@ commands:
     - run:
         name: Scanning code for unused feature flags
         command: |
-          configcat-validator.py $<< parameters.configcat-api-key >> << parameters.scan-directory >> -s="<< parameters.configcat-cdn-server >>" -v=<< parameters.debug >> -f=<< parameters.fail-on-warnings >>
+          if [[ -z "${<< parameters.configcat-api-key >>}" ]]; then
+            echo "Please, set the environemnt variable: '<< parameters.configcat-api-key >>'. Will stop now."
+            exit 1
+          fi
+          configcat-validator.py ${<< parameters.configcat-api-key >>} << parameters.scan-directory >> -s="<< parameters.configcat-cdn-server >>" -v=<< parameters.debug >> -f=<< parameters.fail-on-warnings >>
 
   execute-validation-win:
     description: Scans the repository for ConfigCat feature flag references on windows. Displays the missing feature flag keys in CircleCI's build log.
@@ -174,6 +184,10 @@ commands:
         name: Scanning code for unused feature flags
         shell: powershell.exe
         command: |
+          if (-not (Test-Path env:<< parameters.configcat-api-key >>)) {
+            Write-Host "Please, set the environemnt variable: '<< parameters.configcat-api-key >>'. Will stop now."
+            exit 1
+          }
           configcat-validator.py $env:<< parameters.configcat-api-key >> << parameters.scan-directory >> -s="<< parameters.configcat-cdn-server >>" -v=<< parameters.debug >> -f=<< parameters.fail-on-warnings >>
 
 jobs:
