@@ -2,10 +2,10 @@ version: 2.1
 description: |
   Job and commands for discovering ConfigCat feature flag usages in your source
   code and validating them against your own ConfigCat configuration dashboard.
-  Documentation: https://github.com/configcat/feature-flag-reference-validator
 
 display:
   home_url: https://configcat.com
+  source_url: https://github.com/configcat/flag-reference-validator
 
 examples:
   job-default-configuration:
