@@ -1,7 +1,7 @@
 version: 2.1
 description: |
-  Job and commands for discovering ConfigCat feature flag usages in your source
-  code and validating them against your own ConfigCat configuration dashboard.
+  This Orb is to discover ConfigCat feature flag usages in your source
+  code and to validate them against your feature flags on the ConfigCat Dashboard.
 
 display:
   home_url: https://configcat.com
