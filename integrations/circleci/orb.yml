@@ -126,9 +126,9 @@ commands:
   execute-validation:
     description: Scans the repository for ConfigCat feature flag references. Displays the missing feature flag keys in CircleCI's build log.
     parameters:
-      configcat-api-key:
-        description: The api key of your ConfigCat project.
-        default: CONFIG_CAT_API_KEY
+      configcat-sdk-key:
+        description: The SDK Key of your ConfigCat project.
+        default: CONFIG_CAT_SDK_KEY
         type: env_var_name
       scan-directory:
         description: The directory to scan for flag references.
@@ -150,18 +150,18 @@ commands:
     - run:
         name: Scanning code for unused feature flags
         command: |
-          if [[ -z "${<< parameters.configcat-api-key >>}" ]]; then
-            echo "Please, set the environemnt variable: '<< parameters.configcat-api-key >>'. Will stop now."
+          if [[ -z "${<< parameters.configcat-sdk-key >>}" ]]; then
+            echo "Please, set the environemnt variable: '<< parameters.configcat-sdk-key >>'. Will stop now."
             exit 1
           fi
-          configcat-validator.py ${<< parameters.configcat-api-key >>} << parameters.scan-directory >> -s="<< parameters.configcat-cdn-server >>" -v=<< parameters.debug >> -f=<< parameters.fail-on-warnings >>
+          configcat-validator.py ${<< parameters.configcat-sdk-key >>} << parameters.scan-directory >> -s="<< parameters.configcat-cdn-server >>" -v=<< parameters.debug >> -f=<< parameters.fail-on-warnings >>
 
   execute-validation-win:
     description: Scans the repository for ConfigCat feature flag references on windows. Displays the missing feature flag keys in CircleCI's build log.
     parameters:
-      configcat-api-key:
-        description: The api key of your ConfigCat project.
-        default: CONFIG_CAT_API_KEY
+      configcat-sdk-key:
+        description: The SDK Key of your ConfigCat project.
+        default: CONFIG_CAT_SDK_KEY
         type: env_var_name
       scan-directory:
         description: The directory to scan for flag references.
@@ -184,19 +184,19 @@ commands:
         name: Scanning code for unused feature flags
         shell: powershell.exe
         command: |
-          if (-not (Test-Path env:<< parameters.configcat-api-key >>)) {
-            Write-Host "Please, set the environemnt variable: '<< parameters.configcat-api-key >>'. Will stop now."
+          if (-not (Test-Path env:<< parameters.configcat-sdk-key >>)) {
+            Write-Host "Please, set the environemnt variable: '<< parameters.configcat-sdk-key >>'. Will stop now."
             exit 1
           }
-          configcat-validator.py $env:<< parameters.configcat-api-key >> << parameters.scan-directory >> -s="<< parameters.configcat-cdn-server >>" -v=<< parameters.debug >> -f=<< parameters.fail-on-warnings >>
+          configcat-validator.py $env:<< parameters.configcat-sdk-key >> << parameters.scan-directory >> -s="<< parameters.configcat-cdn-server >>" -v=<< parameters.debug >> -f=<< parameters.fail-on-warnings >>
 
 jobs:
   validate-flag-references:
     description: Scans the repository for ConfigCat feature flag references. Displays the missing feature flag keys in CircleCI's build log.
     parameters:
-      configcat-api-key:
-        description: The api key of your ConfigCat project.
-        default: CONFIG_CAT_API_KEY
+      configcat-sdk-key:
+        description: The SDK Key of your ConfigCat project.
+        default: CONFIG_CAT_SDK_KEY
         type: env_var_name
       configcat-cdn-server:
         description: The domain name of the ConfigCat CDN where you ConfigCat configuration file is stored.
@@ -217,7 +217,7 @@ jobs:
       - checkout:
           path: /ref-validator/repo
       - execute-validation:
-          configcat-api-key: << parameters.configcat-api-key >>
+          configcat-sdk-key: << parameters.configcat-sdk-key >>
           configcat-cdn-server: << parameters.configcat-cdn-server >>
           fail-on-warnings: << parameters.fail-on-warnings >>
           debug: << parameters.debug >>

@@ -8,7 +8,7 @@ from configcatclienttests.mocks import ConfigCacheMock
 class ConfigCatClientTests(unittest.TestCase):
     TESTKEY = "testKey"
 
-    def test_without_api_key(self):
+    def test_without_sdk_key(self):
         try:
             ConfigCatClient(None)
             self.fail('Expected ConfigCatClientException')

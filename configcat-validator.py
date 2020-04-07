@@ -13,8 +13,8 @@ log = logging.getLogger(sys.modules[__name__].__name__)
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("configcat_api_key",
-                        help="The api key of your ConfigCat project.")
+    parser.add_argument("configcat_sdk_key",
+                        help="The SDK Key of your ConfigCat project.")
     parser.add_argument("search_dir",
                         help="The directory to scan for flag references.")
     parser.add_argument("-s", "--configcat_cdn_server",
@@ -40,7 +40,7 @@ def main():
     else:
         logging.basicConfig(level=logging.INFO)
 
-    fetcher = ConfigFetcher(args.configcat_api_key, args.configcat_cdn_server)
+    fetcher = ConfigFetcher(args.configcat_sdk_key, args.configcat_cdn_server)
     finder = ReferenceFinder(args.search_dir)
 
     remote_keys = fetcher.get_flag_keys()

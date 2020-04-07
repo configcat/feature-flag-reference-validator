@@ -23,7 +23,7 @@ This CLI tool is written in python so you have to have python installed on your 
     ```
 3. Execute the validator.
     ```bash
-    configcat-validator.py [YOUR-CONFIGCAT-APIKEY] [DIRECTORY-TO-SCAN] 
+    configcat-validator.py [YOUR-CONFIGCAT-SDKKEY] [DIRECTORY-TO-SCAN] 
     ```
 
 ### Docker
@@ -32,14 +32,14 @@ Pull the configcat/feature-flag-reference-validator docker image to your environ
 ```powershell
 docker pull configcat/feature-flag-reference-validator
 
-docker run configcat-validator.py [YOUR-CONFIGCAT-APIKEY] [DIRECTORY-TO-SCAN]
+docker run configcat-validator.py [YOUR-CONFIGCAT-SDKKEY] [DIRECTORY-TO-SCAN]
 ```
 
 ## Arguments
 
 | Name                       | Required | Default value     | Description                                |
 |----------------------------|----------|-------------------|--------------------------------------------|
-| configcat_api_key          | yes      | N/A               | The api key of your ConfigCat project.     |
+| configcat_sdk_key          | yes      | N/A               | The SDK Key of your ConfigCat project.     |
 | search_dir                 | yes      | N/A               | The directory to scan for flag references. |
 | -s, --configcat_cdn_server | no       | cdn.configcat.com | The domain name of the ConfigCat CDN where you ConfigCat configuration file is stored. |
 | -f, --fail_on_warnings     | no       | false             | Signals an error when the validation fails. By default only warnings are showed. |
@@ -49,7 +49,7 @@ docker run configcat-validator.py [YOUR-CONFIGCAT-APIKEY] [DIRECTORY-TO-SCAN]
 The following command will execute a flag reference validation on the ./repo folder and signals a failure when it finds flag key mismatches.
 ```bash
 configcat-validator.py \
-    [YOUR-CONFIGCAT-APIKEY] \
+    [YOUR-CONFIGCAT-SDKKEY] \
     ./repo \
     --fail_on_warnings \
     --verbose
