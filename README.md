@@ -3,6 +3,9 @@
 
 This CLI utility discovers ConfigCat feature flag usages in your source code and validates them against your feature flags on the ConfigCat Dashboard.
 
+## About ConfigCat
+
+Manage features and change your software configuration using [ConfigCat feature flags](https://configcat.com), without the need to re-deploy code. A [10 minute trainable Dashboard](https://app.configcat.com) allows even non-technical team members to manage features directly. Deploy anytime, release when confident. Target a specific group of users first with new ideas. Supports A/B/n testing and soft launching. Provides [open-source SDKs](https://github.com/configcat) for easy integration with any web, mobile or backend application.
 
 ## Installation
 
@@ -28,7 +31,7 @@ This CLI tool is written in python so you have to have python installed on your 
 
 ### Docker
 
-Pull the configcat/feature-flag-reference-validator docker image to your environment. The image provides an entrypoint `configcat-validator.py` to execute the validator.
+Pull the configcat/feature-flag-reference-validator docker image to your environment. The image provides an entry point `configcat-validator.py` to execute the validator.
 ```powershell
 docker pull configcat/feature-flag-reference-validator
 
@@ -37,13 +40,13 @@ docker run configcat-validator.py [YOUR-CONFIGCAT-SDKKEY] [DIRECTORY-TO-SCAN]
 
 ## Arguments
 
-| Name                       | Required | Default value     | Description                                |
-|----------------------------|----------|-------------------|--------------------------------------------|
-| configcat_sdk_key          | yes      | N/A               | The SDK Key of your ConfigCat project.     |
-| search_dir                 | yes      | N/A               | The directory to scan for flag references. |
+| Name                       | Required | Default value     | Description                                                                            |
+| -------------------------- | -------- | ----------------- | -------------------------------------------------------------------------------------- |
+| configcat_sdk_key          | yes      | N/A               | The SDK Key of your ConfigCat project.                                                 |
+| search_dir                 | yes      | N/A               | The directory to scan for flag references.                                             |
 | -s, --configcat_cdn_server | no       | cdn.configcat.com | The domain name of the ConfigCat CDN where you ConfigCat configuration file is stored. |
-| -f, --fail_on_warnings     | no       | false             | Signals an error when the validation fails. By default only warnings are showed. |
-| -v, --verbose              | no       | false             | Turns on detailed logging. |
+| -f, --fail_on_warnings     | no       | false             | Signals an error when the validation fails. By default only warnings are showed.       |
+| -v, --verbose              | no       | false             | Turns on detailed logging.                                                             |
 
 ## Example
 The following command will execute a flag reference validation on the ./repo folder and signals a failure when it finds flag key mismatches.
