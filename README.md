@@ -71,5 +71,5 @@ Exited with code 1
 - [CircleCI Orb](https://circleci.com/orbs/registry/orb/configcat/feature-flag-reference-validator)
 
 ## About ConfigCat
-- [Documentation](https://docs.configcat.com)
+- [Documentation](https://configcat.com/docs)
 - [Blog](https://blog.configcat.com)
