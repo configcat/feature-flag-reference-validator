@@ -2,7 +2,7 @@
 ## Preparation
 1. Execute the script on the test file.
    ```bash
-   configcat-validator.py 92jVCNQBzuYAenfTn0PZQw/grLLS9QKeEiFJPNLan8K4w ./sample_to_scan -s=testcdn.configcat.com -v
+   python configcat-validator.py PKDVCLf-Hq-h-kCzMp-L7Q/NB1-IBFV50erQbSn7DXGIw ./sample_to_scan -v
    ```
 2. Increase the versions in `setup.py`.
 
