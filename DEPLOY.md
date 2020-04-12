@@ -21,9 +21,9 @@ Use the **same version** for the git tag as in the 2. step of the Preparation se
        ```
 - Via Github release 
 
-  Create a new [Github release](https://github.com/configcat/feature-flag-reference-validator/releases) with a new version tag and release notes.
+Create a new [Github release](https://github.com/configcat/feature-flag-reference-validator/releases) with a new version tag and release notes.
 
-At this point you should have a new [docker image](https://cloud.docker.com/u/configcat/repository/docker/configcat/feature-flag-reference-validator) and [pypi package](https://pypi.org/project/configcat-flag-reference-validator/) with the new version you set earlier.
+At this point you should have a new [docker image](https://cloud.docker.com/u/configcat/repository/docker/configcat/feature-flag-reference-validator) and [pypi package](https://pypi.org/project/configcat-flag-reference-validator) with the new version you set earlier.
 
 ## Publish a new CircleCI orb
 1. Install the [CircleCI CLI](https://circleci.com/docs/2.0/local-cli/#quick-installation).

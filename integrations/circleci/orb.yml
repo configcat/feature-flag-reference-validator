@@ -10,7 +10,7 @@ display:
 
 examples:
   job-default-configuration:
-    description: Executes the reference validatior job with default parameters.
+    description: Executes the reference validator job with default parameters.
     usage:
       version: 2.1
       orbs:
@@ -21,7 +21,7 @@ examples:
             - configcat/validate-flag-references
 
   job-complex-configuration:
-    description: Executes the reference validatior job with verbose logging and fails the execution on validation warnings.
+    description: Executes the reference validator job with verbose logging and fails the execution on validation warnings.
     usage:
       version: 2.1
       orbs:
@@ -66,7 +66,7 @@ examples:
                 scan-directory: /repo
 
   custom-executor:
-    description: Executes the reference validatior in a job which uses the preconfigured configcat job executor.
+    description: Executes the reference validator in a job which uses the pre-configured configcat job executor.
     usage:
       version: 2.1
       orbs:
@@ -152,7 +152,7 @@ commands:
         name: Scanning code for unused feature flags
         command: |
           if [[ -z "${<< parameters.configcat-sdk-key >>}" ]]; then
-            echo "Please, set the environemnt variable: '<< parameters.configcat-sdk-key >>'. Will stop now."
+            echo "Please, set the environment variable: '<< parameters.configcat-sdk-key >>'. Will stop now."
             exit 1
           fi
           configcat-validator.py ${<< parameters.configcat-sdk-key >>} << parameters.scan-directory >> -s="<< parameters.configcat-cdn-server >>" -v=<< parameters.debug >> -f=<< parameters.fail-on-warnings >>
@@ -186,7 +186,7 @@ commands:
         shell: powershell.exe
         command: |
           if (-not (Test-Path env:<< parameters.configcat-sdk-key >>)) {
-            Write-Host "Please, set the environemnt variable: '<< parameters.configcat-sdk-key >>'. Will stop now."
+            Write-Host "Please, set the environment variable: '<< parameters.configcat-sdk-key >>'. Will stop now."
             exit 1
           }
           configcat-validator.py $env:<< parameters.configcat-sdk-key >> << parameters.scan-directory >> -s="<< parameters.configcat-cdn-server >>" -v=<< parameters.debug >> -f=<< parameters.fail-on-warnings >>
