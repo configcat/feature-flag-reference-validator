@@ -9,19 +9,16 @@
 
 ## Publish a new docker image and pypi package
 Use the **same version** for the git tag as in the 2. step of the Preparation section.
-- Via git tag
-    1. Create a new version tag.
-       ```bash
-       git tag v[MAJOR].[MINOR].[PATCH]
-       ```
-       > Example: `git tag v1.2.1`
-    2. Push the tag.
-       ```bash
-       git push origin --tags
-       ```
-- Via Github release 
-
-Create a new [Github release](https://github.com/configcat/feature-flag-reference-validator/releases) with a new version tag and release notes.
+1. Create a new version tag.
+   ```bash
+   git tag v[MAJOR].[MINOR].[PATCH]
+   ```
+   > Example: `git tag v1.2.1`
+2. Push the tag.
+   ```bash
+   git push origin --tags
+   ```
+3. Create a new [Github release](https://github.com/configcat/feature-flag-reference-validator/releases) with a new version tag and release notes.
 
 At this point you should have a new [docker image](https://cloud.docker.com/u/configcat/repository/docker/configcat/feature-flag-reference-validator) and [pypi package](https://pypi.org/project/configcat-flag-reference-validator) with the new version you set earlier.
 
@@ -42,3 +39,6 @@ At this point you should have a new [docker image](https://cloud.docker.com/u/co
    
    > You can also publish non-public developer versions with the `dev:` version prefix like: `feature-flag-reference-validator@dev:1.2.1`
 7. Make sure the new version is available in the [Orb Registry](https://circleci.com/orbs/registry/orb/configcat/feature-flag-reference-validator).
+
+## Test
+Use https://github.com/configcat/flag-reference-validator-tester
