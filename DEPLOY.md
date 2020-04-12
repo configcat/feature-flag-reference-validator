@@ -28,7 +28,7 @@ At this point you should have a new [docker image](https://cloud.docker.com/u/co
 ## Publish a new CircleCI orb
 1. Install the [CircleCI CLI](https://circleci.com/docs/2.0/local-cli/#quick-installation).
 2. Follow [these instructions](https://circleci.com/docs/2.0/local-cli/#configuring-the-cli) to configure the CLI.
-3. Update the new pypi package and docker image versions in `integrations/circleci/orb.yml`.
+3. Update the new pypi package and docker image versions in `integrations/circleci/orb.yml` in lines like: `default: 1.1.0`.
 4. In case of major or minor version number changes update the version references in the [examples section](https://github.com/configcat/feature-flag-reference-validator/blob/master/integrations/circleci/orb.yml#L11) accordingly.
 5. Validate the orb configuration.
    ```bash

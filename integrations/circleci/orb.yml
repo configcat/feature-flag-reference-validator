@@ -14,7 +14,7 @@ examples:
     usage:
       version: 2.1
       orbs:
-        configcat: configcat/feature-flag-reference-validator@1.1
+        configcat: configcat/feature-flag-reference-validator@2.0.1
       workflows:
         main:
           jobs:
@@ -25,7 +25,7 @@ examples:
     usage:
       version: 2.1
       orbs:
-        configcat: configcat/feature-flag-reference-validator@1.1
+        configcat: configcat/feature-flag-reference-validator@2.0.1
       workflows:
         main:
           jobs:
@@ -38,7 +38,7 @@ examples:
     usage:
       version: 2.1
       orbs:
-        configcat: configcat/feature-flag-reference-validator@1.1
+        configcat: configcat/feature-flag-reference-validator@2.0.1
       jobs:
         build:
           docker:
@@ -51,7 +51,7 @@ examples:
     usage:
       version: 2.1
       orbs:
-        configcat: configcat/feature-flag-reference-validator@1.1
+        configcat: configcat/feature-flag-reference-validator@2.0.1
       jobs:
         build:
           docker:
@@ -70,7 +70,7 @@ examples:
     usage:
       version: 2.1
       orbs:
-        configcat: configcat/feature-flag-reference-validator@1.1
+        configcat: configcat/feature-flag-reference-validator@2.0.1
       jobs:
         build:
           executor: configcat/default
@@ -85,7 +85,7 @@ executors:
       docker-image-version:
         description: The version of the ConfigCat flag reference validator docker image.
         type: string
-        default: 1.1.0
+        default: 2.0.1
     docker:
       - image: configcat/feature-flag-reference-validator:<< parameters.docker-image-version >>
 
@@ -96,7 +96,7 @@ commands:
       validator-version:
         description: The version of the ConfigCat flag reference validator pypi package.
         type: string
-        default: 1.1.0
+        default: 2.0.1
     steps:
     - run:
         name: Install feature flag validator dependencies
@@ -111,7 +111,7 @@ commands:
       validator-version:
         description: The version of the ConfigCat flag reference validator pypi package.
         type: string
-        default: 1.1.0
+        default: 2.0.1
     steps:
     - run:
         name: Install feature flag reference validator dependencies
