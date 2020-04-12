@@ -36,7 +36,7 @@ At this point you should have a new [docker image](https://cloud.docker.com/u/co
    ```
 6. Publish the new orb.
    ```bash
-   circleci orb publish orb.yml configcat/feature-flag-reference-validator@[MAJOR].[MINOR].[PATCH]
+   circleci orb publish integrations/circleci/orb.yml configcat/feature-flag-reference-validator@[MAJOR].[MINOR].[PATCH]
    ```
    > Example: `circleci orb publish integrations/circleci/orb.yml configcat/feature-flag-reference-validator@1.2.1`
    
