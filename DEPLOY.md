@@ -4,7 +4,7 @@
    ```bash
    python configcat-validator.py PKDVCLf-Hq-h-kCzMp-L7Q/NB1-IBFV50erQbSn7DXGIw ./sample_to_scan -v
    ```
-2. Increase the versions in `setup.py`.
+2. Increase the version in `setup.py`.
 
 ## Publish a new docker image and pypi package
 Use the **same version** for the git tag as in the 2. step of the Preparation section.
