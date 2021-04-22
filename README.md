@@ -1,4 +1,4 @@
-# feature-flag-reference-validator 
+# Feature Flag reference validator CLI (code scanner)
 [![PyPI](https://img.shields.io/pypi/v/configcat-flag-reference-validator.svg)](https://pypi.python.org/pypi/configcat-flag-reference-validator) [![Docker version](https://img.shields.io/badge/docker-latest-blue)](https://hub.docker.com/r/configcat/feature-flag-reference-validator)
 
 This CLI utility discovers ConfigCat feature flag usages in your source code and validates them against your feature flags on the ConfigCat Dashboard.
