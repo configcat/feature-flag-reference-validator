@@ -69,7 +69,9 @@ Exited with code 1
 
 ## CI Integrations
 - [CircleCI Orb](https://circleci.com/orbs/registry/orb/configcat/feature-flag-reference-validator)
+- [GitHub Action](https://github.com/marketplace/actions/configcat-feature-flag-cleanup)
 
 ## About ConfigCat
+- [Home Page](https://configcat.com)
 - [Documentation](https://configcat.com/docs)
 - [Blog](https://blog.configcat.com)
